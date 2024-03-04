@@ -2,6 +2,7 @@ import json, time, logging, uuid, requests
 from datetime import datetime
 from airflow import DAG
 from kafka import KafkaProducer
+from time import sleep
 from airflow.operators.python import PythonOperator
 
 # Define the default args for the DAG
@@ -12,7 +13,7 @@ default_args = {
 
 # Initialize the serializer that will wrap data and encode it into utf-8
 def serializer(message):
-    return json.dumps(message).encode('utf-8')
+    return json.dumps(message, default=str).encode('utf-8')
 
 def format_data(json_input):
     # Define an output var to enrich the data
@@ -42,14 +43,9 @@ def stream_data():
         bootstrap_servers = ['kafka:9092'],
         value_serializer = serializer
     )
-    # Get the current time
-    curr_time = time.time()
     
     # Infinite loop to continue grabbing the data
     while True:
-        # System is getting throtled and needs to be booted out of
-        if time.time() > curr_time + 60: 
-            break
         # Try querying the data from the API, formatting, and sending it
         try:
             # Grab the data and format it
@@ -58,6 +54,10 @@ def stream_data():
 
             # Send the data to the topic
             producer.send('air_gradient_metrics', res)
+
+            # Sleep for 5 seconds to not ovewhelm the system
+            sleep(5)
+            
         # Otherwise, end in an exception and log the error
         except Exception as e:
             logging.error(f'An error occured: {e}')
