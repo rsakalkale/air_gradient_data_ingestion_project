@@ -6,7 +6,7 @@ End to end implementation to pull real time data from the AirGradient sensor, in
 <h2>Installation Stpes</h2>
 <ol>1. Install Docker on your system.</ol>
 <ol>2. Clone the repo to your host.</ol>
-<ol>3. Ensure proper airflow permissions have been granted by running <code>echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env</code> and granting elevated permissions to script/entrypoint.sh <code>chmod +x entrypoint.sh </code>. Grant write permissions for airflow to logs, dags, and plugins <code>chmod -R 777 dags/</code>.</ol>
+<ol>3. Ensure proper airflow permissions have been granted by running <code>echo -e "AIRFLOW_UID=$(id -u)\nAIRFLOW_GID=0" > .env</code> and granting elevated permissions to script/entrypoint.sh <code>chmod +x entrypoint.sh </code>. Grant write permissions for airflow to logs, dags, and plugins (e.g. <code>chmod -R 777 dags/</code>).</ol>
 <ol>4. Execute the <code>sudo docker compose up -d</code> to instantiate all of the services.</ol> 
 <ol>5. Ensure that all services are successfully up and running.</ol> 
 <ol>6. Access Airflow at host instance ip address at <code>port 8080</code>, enable the DAG, and then trigger it.</ol> 
