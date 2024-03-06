@@ -2,3 +2,6 @@ ag_metrics/
 logs/*
 logs/dag_processor_manager/dag_processor_manager.log
 logs/scheduler/2024-03-04/kafka_stream_metrics.py.log
+logs/dag_processor_manager/dag_processor_manager.log
+logs/scheduler/latest
+logs/scheduler/2024-03-04/kafka_stream_metrics.py.log

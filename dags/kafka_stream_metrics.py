@@ -1,4 +1,4 @@
-import json, time, logging, uuid, requests
+import json, logging, uuid, requests, pytz
 from datetime import datetime
 from airflow import DAG
 from kafka import KafkaProducer
@@ -18,10 +18,13 @@ def serializer(message):
 def format_data(json_input):
     # Define an output var to enrich the data
     json_output = {}
-
+    
+    # Select the Los Angeles timezone
+    pst_timezone = pytz.timezone('America/Los_Angeles') 
+    
     # Add in a UUID and timestamp
-    json_output['uuid'] = uuid.uuid4()
-    json_output['timestamp'] = datetime.now()
+    json_output['id'] = uuid.uuid4()
+    json_output['timestamp'] = datetime.now(pst_timezone)
 
     # Grab all inputs and add them to enriched JSON output
     for k, v in json_input.items():

@@ -11,6 +11,7 @@ End to end implementation to pull real time data from the AirGradient sensor, in
 <ol>5. Ensure that all services are successfully up and running.</ol> 
 <ol>6. Access Airflow at host instance ip address at <code>port 8080</code>, enable the DAG, and then trigger it.</ol> 
 <ol>7. Verify that messages are being appended to topic <code>air_gradient_metrics</code>.</ol> 
+<ol>8. Install spark cassandra & spark sql kafka drivers <code>air_gradient_metrics</code>.</ol> 
 
 
 <h2>Useful Terminal Commands</h2>
